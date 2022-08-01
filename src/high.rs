@@ -25,6 +25,7 @@ pub use crate::__high_type_lambda as type_lambda;
 macro_rules! __high_type_lambda {
     ($($vis:vis type<$lt:lifetime> $name:ident $(<$($T:ident $(: $bound:path)*),*>)* = $ty:ty;)+) => {
         $($vis struct $name $(<$($T $(: $bound)*),*>)* {
+            #[allow(unused_parens)]
             _marker: ::std::marker::PhantomData<($($($T),*)*)>,
         }
         impl<$lt, $($($T $(: $bound)*),*)*> $crate::high::ApplyL<$lt>
